@@ -1,10 +1,14 @@
-const mongoose = require('mongoose')
-const mongoURI = "mongodb://localhost:27017/notebook"
+const mongoose = require("mongoose");
+const DB = process.env.DATABASE;
 
-const connectToMongo = ()=>{
-    mongoose.connect(mongoURI, ()=>{
-        console.log("connected to Mongo")
-    })
-}
+mongoose.set('strictQuery', false);
+mongoose.connect(DB, {
+    useNewUrlParser: true,
+    // useCreateIndex: true,
+    useUnifiedTopology:true,
+    // useFindAndModify:false
+}).then(()=>{
+    console.log("Database Connected")
+}).catch((err) => console.log("Database Not Connected"))
 
-module.exports = connectToMongo;
+// module.exports = connectToMongo;
